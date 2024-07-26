@@ -25,11 +25,10 @@ def menu():
 def download_video():
     url = input("Insert the video URL: ")
     yt = YouTube(url)
-    stream = yt.streams.filter(
-        progressive=True,
-        file_extension='mp4').order_by('resolution').desc().first()
     try:
-        stream.download()
+        stream = yt.streams.filter(
+            progressive=True,
+            file_extension='mp4').order_by('resolution').desc().first().download() # noqa
         print("Download completed!")
     except Exception as e:
         print(f"Error during download: {e}")
